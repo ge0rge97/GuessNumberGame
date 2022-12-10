@@ -1,5 +1,5 @@
 //
-//  PlayerChoiceRootView.swift
+//  PlayerRoundRootView.swift
 //  GuessNumber_Test
 //
 //  Created by Georgiy Groshev on 06.12.2022.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class PlayerChoiceRootView: BaseView {
+final class PlayerRoundRootView: BaseView {
     
-    let choiceButton = BaseButton(withTitle: "Let's try")
+    let choiceButton = BaseButton(withTitle: R.Strings.PlayerRound.choiceButton)
     
     let answerLabel = UILabel()
     
@@ -29,7 +29,7 @@ final class PlayerChoiceRootView: BaseView {
     }
 }
 //MARK: - Required Methods
-extension PlayerChoiceRootView {
+extension PlayerRoundRootView {
     
     override func setupViews() {
         
@@ -41,13 +41,12 @@ extension PlayerChoiceRootView {
         
         [choiceButton, answerLabel].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        answerLabel.text = "Test Answer"
         answerLabel.font = .systemFont(ofSize: 20)
         answerLabel.textAlignment = .center
     }
 }
 //MARK: - Constants
-private extension PlayerChoiceRootView {
+private extension PlayerRoundRootView {
     
     enum Constants {
         

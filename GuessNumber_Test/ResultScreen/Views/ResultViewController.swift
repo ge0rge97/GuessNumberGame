@@ -9,11 +9,17 @@ import UIKit
 
 final class ResultViewController: BaseViewController<ResultRootView> {
     
+    private var resultViewModel: ResultViewModelProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.resultViewModel = ResultViewModel()
+        
         setupNavigationItem()
         setupButtonAction()
+        
+        self.mainView.resultLabel.text = resultViewModel?.getGameResult()
     }
 }
 //MARK: - Required Methods
@@ -21,7 +27,7 @@ private extension ResultViewController {
     
     func setupNavigationItem() {
         
-        self.navigationItem.title = "Result"
+        self.navigationItem.title = R.Strings.ResultScreen.navigationTitle
     }
     
     func setupButtonAction() {
@@ -35,6 +41,8 @@ private extension ResultViewController {
     
     func restartButtonAction() {
         
-        print(#function)
+        let enterViewController = StartViewController()
+        
+        self.transitionWithNavigationController(transitionTo: enterViewController)
     }
 }

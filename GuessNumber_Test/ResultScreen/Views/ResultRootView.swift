@@ -9,7 +9,7 @@ import UIKit
 
 final class ResultRootView: BaseView {
     
-    let restartButton = BaseButton(withTitle: "Restart?")
+    let restartButton = BaseButton(withTitle: R.Strings.ResultScreen.restartButton)
     
     let resultLabel = UILabel()
     
@@ -41,7 +41,6 @@ extension ResultRootView {
         
         [resultLabel, restartButton].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        resultLabel.text = "Test Result"
         resultLabel.font = .systemFont(ofSize: 20)
         resultLabel.textAlignment = .center
     }

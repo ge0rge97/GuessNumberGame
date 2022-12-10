@@ -9,11 +9,25 @@ import UIKit
 
 final class StartViewController: BaseViewController<StartRootView> {
     
+    private var restartGameViewModel: RestartGameViewModelProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationTitle()
         setupButtonAction()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        self.restartGameViewModel = RestartGameViewModel()
+        
+        self.restartGameViewModel?.restartGame()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 //MARK: - Private Methods
@@ -21,7 +35,7 @@ private extension StartViewController {
     
     func setupNavigationTitle() {
         
-        self.navigationItem.title = "Guess the Number"
+        self.navigationItem.title = R.Strings.StartScreen.navigationTitle
     }
     
     func setupButtonAction() {
@@ -34,7 +48,6 @@ private extension StartViewController {
 private extension StartViewController {
 
     func startButtonAction() {
-        print(#function)
         
         let vc = EnterNumberScreenViewController()
         self.navigationController?.pushViewController(vc, animated: true)

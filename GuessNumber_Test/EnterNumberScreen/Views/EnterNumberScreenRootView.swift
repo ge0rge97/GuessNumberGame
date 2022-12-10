@@ -9,7 +9,7 @@ import UIKit
 
 final class EnterNumberScreenRootView: BaseView {
     
-    let enterNumberButton = BaseButton(withTitle: "Enter your Number")
+    let enterNumberButton = BaseButton(withTitle: R.Strings.EnterNumberScreen.enterNumberButton)
     
     //MARK: - Constraints
     override func layoutSubviews() {

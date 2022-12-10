@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class ComputerChoiceRootView: BaseView {
+final class ComputerRoundRootView: BaseView {
     
     let computerChoiceLabel = UILabel()
     
-    let moreButtonAnswer = ComputerChoiceRootView.createAnswerButton(withTitle: .more)
-    let lessButtonAnswer = ComputerChoiceRootView.createAnswerButton(withTitle: .less)
-    let correctButtonAnswer = ComputerChoiceRootView.createAnswerButton(withTitle: .correct)
+    let moreButtonAnswer = ComputerRoundRootView.createAnswerButton(withTitle: .more)
+    let lessButtonAnswer = ComputerRoundRootView.createAnswerButton(withTitle: .less)
+    let correctButtonAnswer = ComputerRoundRootView.createAnswerButton(withTitle: .correct)
     
     private let stackView = UIStackView()
     
@@ -33,7 +33,7 @@ final class ComputerChoiceRootView: BaseView {
     }
 }
 //MARK: - Required Methods
-extension ComputerChoiceRootView {
+extension ComputerRoundRootView {
     
     override func setupViews() {
         
@@ -50,7 +50,6 @@ extension ComputerChoiceRootView {
         [computerChoiceLabel, stackView]
             .forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
-        computerChoiceLabel.text = "Test Answer"
         computerChoiceLabel.font = .systemFont(ofSize: 20)
         computerChoiceLabel.textAlignment = .center
         
@@ -60,15 +59,15 @@ extension ComputerChoiceRootView {
     }
 }
 //MARK: - Create Answer Button
-private extension ComputerChoiceRootView {
+private extension ComputerRoundRootView {
     
     static func createAnswerButton(
-            withTitle title: Answers)
+        withTitle title: Answers)
     -> UIButton {
         
         let button = UIButton(type: .system)
         
-        button.setTitle(title.rawValue, for: .normal)
+        button.setTitle(title.title, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
         button.backgroundColor = UIColor(hexString: "2A5954")
@@ -76,8 +75,29 @@ private extension ComputerChoiceRootView {
         return button
     }
 }
+//MARK: - Answers
+private extension ComputerRoundRootView {
+    
+    enum Answers: String {
+        
+        case correct
+        case more
+        case less
+        
+        var title: String {
+            switch self {
+            case .correct:
+                return "="
+            case .more:
+                return ">"
+            case .less:
+                return "<"
+            }
+        }
+    }
+}
 //MARK: - Constants
-private extension ComputerChoiceRootView {
+private extension ComputerRoundRootView {
     
     enum Constants {
         

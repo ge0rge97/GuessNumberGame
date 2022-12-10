@@ -9,7 +9,7 @@ import UIKit
 
 final class StartRootView: BaseView {
     
-    let startButton = BaseButton(withTitle: "Let's start")
+    let startButton = BaseButton(withTitle: R.Strings.StartScreen.startButton)
     
     //MARK: - Constraints
     override func layoutSubviews() {

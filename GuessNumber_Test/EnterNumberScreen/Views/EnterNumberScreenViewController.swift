@@ -21,31 +21,29 @@ private extension EnterNumberScreenViewController {
     
     func setupNavigationTitle() {
         
-        self.navigationItem.title = "Enter your Number"
+        self.navigationItem.title = R.Strings.EnterNumberScreen.enterNumberButton
     }
     
     func enterNumberButtonAction() {
         
-        mainView.enterNumberButton.addTarget(self, action: #selector(enterButtonAction), for: .touchUpInside)
+        mainView.enterNumberButton.addTarget(self,
+                                             action: #selector(enterButtonAction),
+                                             for: .touchUpInside)
     }
-    
 }
 //MARK: - Actions
 @objc
-private extension EnterNumberScreenViewController {
+extension EnterNumberScreenViewController {
     
     func enterButtonAction() {
-        print(#function)
         
-        let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Enter", style: .default, handler: { _ in
+        self.getAlertWithCompletion(withTitle: R.Strings.Alert.alertTitle,
+                                    andMessage: R.Strings.Alert.alertMessage) {
+            (number) in
             
-            guard let text = alert.textFields?[0].text else { return }
+            let computerRoundViewController = ComputerRoundViewController(withHiddenNumber: number)
             
-            print(text)
-        }))
-        
-        alert.addTextField()
-        present(alert, animated: true)
+            self.transitionWithNavigationController(transitionTo: computerRoundViewController)
+        }
     }
 }
