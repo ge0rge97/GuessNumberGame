@@ -49,7 +49,7 @@ private extension StartViewController {
 
     func startButtonAction() {
         
-        let vc = EnterNumberScreenViewController()
+        let vc = DifficultyLevelViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

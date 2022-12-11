@@ -7,24 +7,44 @@
 
 import Foundation
 
-enum ResultsModels: String {
+struct ResultsModels {
     
-    case computerWin
-    case playerWin
-    case draw
+    var numberOfComputerTries: Int
+    
+    var numberOfPlayersTries: Int
+    
+    var results: Results
+    
+    init(results: Results) {
+        
+        let userDefaults = UserDefaults.standard
+        
+        self.numberOfComputerTries = userDefaults.integer(forKey: R.UserDefaultsKeys.computerRound)
+        
+        self.numberOfPlayersTries = userDefaults.integer(forKey: R.UserDefaultsKeys.playerRound)
+        
+        self.results = results
+    }
 }
 
 extension ResultsModels {
     
-    var title: String {
+    enum Results: String {
         
-        switch self {
-        case .computerWin:
-            return "Computer win"
-        case .playerWin:
-            return "You win"
-        case .draw:
-            return "It's draw"
+        case computerWin
+        case playerWin
+        case draw
+        
+        var title: String {
+            
+            switch self {
+            case .computerWin:
+                return "Computer win"
+            case .playerWin:
+                return "You win"
+            case .draw:
+                return "It's draw"
+            }
         }
     }
 }

@@ -28,7 +28,9 @@ class PlayerRoundViewModel: PlayerRoundViewModelProtocol {
     
     init() {
         
-        self.computerHiddenNumber = Int.random(in: 1...5)
+        let maximumNumber: Int = self.userDefaults.integer(forKey: R.UserDefaultsKeys.maximumNumber)
+        
+        self.computerHiddenNumber = Int.random(in: 1...maximumNumber)
         
         self.playerRound = GameModel(hiddenNumber: computerHiddenNumber)
     }
@@ -45,14 +47,21 @@ class PlayerRoundViewModel: PlayerRoundViewModelProtocol {
             
         } else {
             
-            playerRound.increaseNumberOfTries()
+            if number > computerHiddenNumber {
+                
+                computerAnswer.value = R.Strings.PlayerRound.tooMuchAnswer
+            } else {
+                
+                computerAnswer.value = R.Strings.PlayerRound.tooLessAnswer
+            }
             
-            computerAnswer.value =  R.Strings.PlayerRound.wrongAnswer
+            playerRound.increaseNumberOfTries()
         }
     }
     
     func saveNumberOfTries() {
         
-        userDefaults.set(playerRound.numberOfTries, forKey: R.UserDefaultsKeys.playerRound)
+        userDefaults.set(playerRound.numberOfTries,
+                         forKey: R.UserDefaultsKeys.playerRound)
     }
 }

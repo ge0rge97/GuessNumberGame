@@ -16,6 +16,8 @@ enum Resources {
         
         static let computerRound = "computerRound"
         static let playerRound = "playerRound"
+        
+        static let maximumNumber = "difficultLevel"
     }
 }
 //MARK: - Strings
@@ -33,6 +35,14 @@ extension Resources {
             
             static let startButton = "Let's start"
             static let navigationTitle = "Guess the Number Game"
+        }
+        
+        enum DifficultyLevel {
+            
+            static let navigationTitle = "Select Difficulty Level"
+            static let easyButton = "Easy Level: 1-10"
+            static let mediumButton = "Medium Level: 1-25"
+            static let hardButton = "Hard Level: 1-50"
         }
         
         enum EnterNumberScreen {
@@ -53,7 +63,8 @@ extension Resources {
             static let navigationTitle = "Player Turn"
             
             static let correctAnswer = "Correct"
-            static let wrongAnswer = "Wrong"
+            static let tooMuchAnswer = "Too much"
+            static let tooLessAnswer = "Too less"
         }
         
         enum ResultScreen {

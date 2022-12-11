@@ -45,20 +45,12 @@ extension ComputerRoundViewController {
     
     func bindViewModel() {
         
-        self.computerRoundViewModel?.computerVariant.bind({ (computerVariant) in
+        self.computerRoundViewModel?.computerVariant.bind({ [weak self] (computerVariant) in
             
             DispatchQueue.main.async {
-                self.mainView.computerChoiceLabel.text = String(computerVariant)
+                self?.mainView.computerChoiceLabel.text = String(computerVariant)
             }
         })
-    }
-    
-    func createAlert(withTitle title: String) {
-        
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        
-        self.present(alert, animated: true)
     }
 }
 //MARK: - Actions
@@ -67,17 +59,17 @@ extension ComputerRoundViewController {
     
     func moreButtonAction() {
     
-        self.computerRoundViewModel?.reduceVariantNumber(completion: { error in
+        self.computerRoundViewModel?.reduceVariantNumber(completion: { [weak self] error in
             
-            self.createAlert(withTitle: error)
+            self?.createAlert(withTitle: error)
         })
     }
     
     func lessButtonAction() {
         
-        self.computerRoundViewModel?.increaseVariantNumber(completion: { error in
+        self.computerRoundViewModel?.increaseVariantNumber(completion: { [weak self] error in
             
-            self.createAlert(withTitle: error)
+            self?.createAlert(withTitle: error)
         })
     }
     

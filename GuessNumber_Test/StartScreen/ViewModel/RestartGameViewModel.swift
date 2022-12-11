@@ -20,5 +20,6 @@ class RestartGameViewModel: RestartGameViewModelProtocol {
         
         userDefaults.removeObject(forKey: R.UserDefaultsKeys.computerRound)
         userDefaults.removeObject(forKey: R.UserDefaultsKeys.playerRound)
+        userDefaults.removeObject(forKey: R.UserDefaultsKeys.maximumNumber)
     }
 }

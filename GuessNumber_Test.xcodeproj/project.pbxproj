@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010AA1FD29463F6400C868E1 /* DifficultyLevelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010AA1FC29463F6400C868E1 /* DifficultyLevelViewModel.swift */; };
+		015191E6294611D600A8BFF5 /* DifficultyLevelRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015191E5294611D600A8BFF5 /* DifficultyLevelRootView.swift */; };
+		015191E82946121000A8BFF5 /* DifficultyLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015191E72946121000A8BFF5 /* DifficultyLevelViewController.swift */; };
 		017CAD5C2944F90600E8491A /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017CAD5B2944F90600E8491A /* Resources.swift */; };
 		0193C8F62944B69F00F3F3F7 /* RestartGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193C8F52944B69F00F3F3F7 /* RestartGameViewModel.swift */; };
 		01A535AC2943A38E00D07470 /* ResultsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A535AB2943A38E00D07470 /* ResultsModels.swift */; };
@@ -36,6 +39,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		010AA1FC29463F6400C868E1 /* DifficultyLevelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyLevelViewModel.swift; sourceTree = "<group>"; };
+		015191E5294611D600A8BFF5 /* DifficultyLevelRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyLevelRootView.swift; sourceTree = "<group>"; };
+		015191E72946121000A8BFF5 /* DifficultyLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyLevelViewController.swift; sourceTree = "<group>"; };
 		017CAD5B2944F90600E8491A /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		0193C8F52944B69F00F3F3F7 /* RestartGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestartGameViewModel.swift; sourceTree = "<group>"; };
 		01A535AB2943A38E00D07470 /* ResultsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsModels.swift; sourceTree = "<group>"; };
@@ -77,6 +83,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		010AA1FB29463F5800C868E1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				010AA1FC29463F6400C868E1 /* DifficultyLevelViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		015191E3294611B400A8BFF5 /* DifficultyLevel */ = {
+			isa = PBXGroup;
+			children = (
+				015191E4294611C600A8BFF5 /* Views */,
+				010AA1FB29463F5800C868E1 /* ViewModel */,
+			);
+			path = DifficultyLevel;
+			sourceTree = "<group>";
+		};
+		015191E4294611C600A8BFF5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				015191E5294611D600A8BFF5 /* DifficultyLevelRootView.swift */,
+				015191E72946121000A8BFF5 /* DifficultyLevelViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		017CAD5A2944F8FD00E8491A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,15 +176,16 @@
 		01BAD60E293F9F360062EC67 /* GuessNumber_Test */ = {
 			isa = PBXGroup;
 			children = (
-				017CAD5A2944F8FD00E8491A /* Resources */,
 				01F1756C2940D9FC0093CAE9 /* Models */,
 				01BAD62A293FA06C0062EC67 /* StartScreen */,
+				015191E3294611B400A8BFF5 /* DifficultyLevel */,
 				01BAD633293FAF170062EC67 /* EnterNumberScreen */,
 				01BAD641293FC85A0062EC67 /* ComputerRound */,
 				01BAD63B293FBF130062EC67 /* PlayerRound */,
 				01BAD647293FD53E0062EC67 /* ResultScreen */,
 				01BAD625293F9FBC0062EC67 /* Base */,
 				01BAD630293FA4CB0062EC67 /* Extensions */,
+				017CAD5A2944F8FD00E8491A /* Resources */,
 				01BAD624293F9FB20062EC67 /* Application */,
 				01BAD623293F9F520062EC67 /* SupportingFiles */,
 			);
@@ -192,8 +225,8 @@
 		01BAD62A293FA06C0062EC67 /* StartScreen */ = {
 			isa = PBXGroup;
 			children = (
-				0193C8F42944B69800F3F3F7 /* ViewModel */,
 				01BAD62B293FA0750062EC67 /* Views */,
+				0193C8F42944B69800F3F3F7 /* ViewModel */,
 			);
 			path = StartScreen;
 			sourceTree = "<group>";
@@ -365,11 +398,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				015191E82946121000A8BFF5 /* DifficultyLevelViewController.swift in Sources */,
 				01BAD638293FB0150062EC67 /* EnterNumberScreenViewController.swift in Sources */,
 				01F1756E2940DA100093CAE9 /* GameModel.swift in Sources */,
 				01BAD636293FAF370062EC67 /* EnterNumberScreenRootView.swift in Sources */,
+				015191E6294611D600A8BFF5 /* DifficultyLevelRootView.swift in Sources */,
 				01BAD610293F9F360062EC67 /* AppDelegate.swift in Sources */,
 				01BAD64C293FD5960062EC67 /* ResultViewController.swift in Sources */,
+				010AA1FD29463F6400C868E1 /* DifficultyLevelViewModel.swift in Sources */,
 				01BAD64A293FD56C0062EC67 /* ResultRootView.swift in Sources */,
 				01BAD62D293FA07F0062EC67 /* StartRootView.swift in Sources */,
 				01BAD646293FC8AE0062EC67 /* ComputerRoundViewController.swift in Sources */,

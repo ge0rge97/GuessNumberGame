@@ -14,32 +14,31 @@ protocol ResultViewModelProtocol: AnyObject {
 
 class ResultViewModel: ResultViewModelProtocol {
     
-    private var numberOfComputerTries: Int
-    
-    private var numberOfPlayersTries: Int
-    
     private let userDefaults = UserDefaults.standard
+    
+    private var resultsModel: ResultsModels
     
     init() {
         
-        self.numberOfComputerTries = userDefaults.integer(forKey: R.UserDefaultsKeys.computerRound)
-        
-        self.numberOfPlayersTries = userDefaults.integer(forKey: R.UserDefaultsKeys.playerRound)
+        resultsModel = ResultsModels(results: .draw)
     }
     
     func getGameResult() -> String {
         
-        if numberOfPlayersTries > numberOfComputerTries {
+        if resultsModel.numberOfPlayersTries > resultsModel.numberOfComputerTries {
             
-            return ResultsModels.computerWin.title
+            self.resultsModel.results = .computerWin
+            return resultsModel.results.title
             
-        } else if numberOfComputerTries > numberOfPlayersTries {
+        } else if resultsModel.numberOfComputerTries > resultsModel.numberOfPlayersTries {
             
-            return ResultsModels.playerWin.title
+            self.resultsModel.results = .playerWin
+            return resultsModel.results.title
             
         } else {
             
-            return ResultsModels.draw.title
+            self.resultsModel.results = .draw
+            return resultsModel.results.title
         }
     }
 }

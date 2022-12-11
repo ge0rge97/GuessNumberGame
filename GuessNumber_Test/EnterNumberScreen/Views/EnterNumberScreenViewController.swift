@@ -9,6 +9,8 @@ import UIKit
 
 final class EnterNumberScreenViewController: BaseViewController<EnterNumberScreenRootView> {
     
+    private let userDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,12 +40,18 @@ extension EnterNumberScreenViewController {
     func enterButtonAction() {
         
         self.getAlertWithCompletion(withTitle: R.Strings.Alert.alertTitle,
-                                    andMessage: R.Strings.Alert.alertMessage) {
+                                    andMessage: R.Strings.Alert.alertMessage) { [weak self]
             (number) in
+            
+            guard number <= self?.userDefaults.integer(forKey: R.UserDefaultsKeys.maximumNumber) ?? 1 else {
+                
+                self?.createAlert(withTitle: "You number haven't been more than \(self?.userDefaults.integer(forKey: R.UserDefaultsKeys.maximumNumber) ?? 1)")
+                return
+            }
             
             let computerRoundViewController = ComputerRoundViewController(withHiddenNumber: number)
             
-            self.transitionWithNavigationController(transitionTo: computerRoundViewController)
+            self?.transitionWithNavigationController(transitionTo: computerRoundViewController)
         }
     }
 }

@@ -20,7 +20,7 @@ protocol ComputerRoundViewModelProtocol: AnyObject {
 
 class ComputerRoundViewModel: ComputerRoundViewModelProtocol {
     
-    var computerVariant: Dynamic<Int> = Dynamic((Int.random(in: 1...5)))
+    var computerVariant: Dynamic<Int>
     
     private var playersHiddenNumber: Int
         
@@ -28,7 +28,13 @@ class ComputerRoundViewModel: ComputerRoundViewModelProtocol {
     
     private let userDefaults = UserDefaults.standard
     
+    private let maximumNumber: Int
+    
     init(hiddenNumber: Int) {
+        
+        maximumNumber = self.userDefaults.integer(forKey: R.UserDefaultsKeys.maximumNumber)
+        
+        self.computerVariant = Dynamic((Int.random(in: 1...maximumNumber)))
         
         self.playersHiddenNumber = hiddenNumber
         
@@ -58,12 +64,13 @@ class ComputerRoundViewModel: ComputerRoundViewModelProtocol {
         }
         
         self.computerRound.increaseNumberOfTries()
-        self.computerVariant.value = Int.random(in: (self.computerVariant.value + 1)...5)
+        self.computerVariant.value = Int.random(in: (self.computerVariant.value + 1)...self.maximumNumber)
     }
     
     func saveNumberOfTries() {
         
-        userDefaults.set(computerRound.numberOfTries, forKey: R.UserDefaultsKeys.computerRound)
+        userDefaults.set(computerRound.numberOfTries,
+                         forKey: R.UserDefaultsKeys.computerRound)
     }
     
     private func protectionAgainstLiars() -> String {

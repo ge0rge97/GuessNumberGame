@@ -15,7 +15,6 @@ class BaseViewController<View: UIView>: UIViewController {
         view = View()
     }
 }
-
 //MARK: - Transition Method 
 extension BaseViewController {
     
@@ -28,9 +27,9 @@ extension BaseViewController {
         self.present(navVC, animated: true)
     }
 }
-//MARK: - Add Alert Method
+//MARK: - Add Alert Methods
 extension BaseViewController {
-    
+    //MARK: - With completion
     func getAlertWithCompletion(withTitle title: String?,
                                 andMessage message: String?,
                                 completion: @escaping (Int) -> ()) {
@@ -46,5 +45,13 @@ extension BaseViewController {
         
         alert.addTextField()
         present(alert, animated: true)
+    }
+    //MARK: - Without completion
+    func createAlert(withTitle title: String) {
+        
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alert, animated: true)
     }
 }
