@@ -10,18 +10,14 @@ import UIKit
 final class ComputerRoundRootView: BaseView {
     
     let computerChoiceLabel = UILabel()
-    
     let moreButtonAnswer = ComputerRoundRootView.createAnswerButton(withTitle: .more)
     let lessButtonAnswer = ComputerRoundRootView.createAnswerButton(withTitle: .less)
     let correctButtonAnswer = ComputerRoundRootView.createAnswerButton(withTitle: .correct)
-    
     private let stackView = UIStackView()
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         NSLayoutConstraint.activate([
-        
             computerChoiceLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Constants.labelSpacing),
             computerChoiceLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             
@@ -36,19 +32,12 @@ final class ComputerRoundRootView: BaseView {
 extension ComputerRoundRootView {
     
     override func setupViews() {
-        
-        [lessButtonAnswer, correctButtonAnswer, moreButtonAnswer]
-            .forEach{ stackView.addArrangedSubview($0) }
-        
-        [computerChoiceLabel, stackView]
-            .forEach{ addSubview($0) }
+        [lessButtonAnswer, correctButtonAnswer, moreButtonAnswer].forEach{ stackView.addArrangedSubview($0) }
+        [computerChoiceLabel, stackView].forEach{ addSubview($0) }
     }
-    
     override func configureAppearance() {
         super.configureAppearance()
-        
-        [computerChoiceLabel, stackView]
-            .forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
+        [computerChoiceLabel, stackView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
         computerChoiceLabel.font = .systemFont(ofSize: 20)
         computerChoiceLabel.textAlignment = .center
@@ -61,10 +50,7 @@ extension ComputerRoundRootView {
 //MARK: - Create Answer Button
 private extension ComputerRoundRootView {
     
-    static func createAnswerButton(
-        withTitle title: Answers)
-    -> UIButton {
-        
+    static func createAnswerButton(withTitle title: Answers) -> UIButton {
         let button = UIButton(type: .system)
         
         button.setTitle(title.title, for: .normal)
@@ -75,14 +61,19 @@ private extension ComputerRoundRootView {
         return button
     }
 }
+//MARK: - Constants
+private extension ComputerRoundRootView {
+    
+    enum Constants {
+        static let labelSpacing: CGFloat = 70
+        static let buttonHeight: CGFloat = 35
+    }
+}
 //MARK: - Answers
 private extension ComputerRoundRootView {
     
     enum Answers: String {
-        
-        case correct
-        case more
-        case less
+        case correct, more, less
         
         var title: String {
             switch self {
@@ -94,15 +85,5 @@ private extension ComputerRoundRootView {
                 return "<"
             }
         }
-    }
-}
-//MARK: - Constants
-private extension ComputerRoundRootView {
-    
-    enum Constants {
-        
-        static let labelSpacing: CGFloat = 70
-        
-        static let buttonHeight: CGFloat = 35
     }
 }

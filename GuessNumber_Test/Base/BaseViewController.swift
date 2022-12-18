@@ -19,9 +19,7 @@ class BaseViewController<View: UIView>: UIViewController {
 extension BaseViewController {
     
     func transitionWithNavigationController(transitionTo viewController: UIViewController) {
-        
         let viewController = viewController
-        
         let navVC = UINavigationController(rootViewController: viewController)
         navVC.modalPresentationStyle = .fullScreen
         self.present(navVC, animated: true)
@@ -39,7 +37,6 @@ extension BaseViewController {
             
             guard let text = alert.textFields?[0].text,
                     let number = Int(text) else { return }
-            
             (completion)(number)
         }))
         
@@ -51,7 +48,6 @@ extension BaseViewController {
         
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
-        
         self.present(alert, animated: true)
     }
 }

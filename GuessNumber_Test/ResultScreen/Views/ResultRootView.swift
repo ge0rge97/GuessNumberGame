@@ -10,14 +10,11 @@ import UIKit
 final class ResultRootView: BaseView {
     
     let restartButton = BaseButton(withTitle: R.Strings.ResultScreen.restartButton)
-    
     let resultLabel = UILabel()
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         NSLayoutConstraint.activate([
-            
             resultLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Constants.buttonHeight),
             resultLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
         
@@ -32,13 +29,10 @@ final class ResultRootView: BaseView {
 extension ResultRootView {
     
     override func setupViews() {
-        
         [resultLabel, restartButton].forEach{ addSubview($0) }
     }
-    
     override func configureAppearance() {
         super.configureAppearance()
-        
         [resultLabel, restartButton].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
         resultLabel.font = .systemFont(ofSize: 20)
@@ -49,7 +43,6 @@ extension ResultRootView {
 private extension ResultRootView {
     
     enum Constants {
-        
         static let buttonHeight: CGFloat = 70
     }
 }

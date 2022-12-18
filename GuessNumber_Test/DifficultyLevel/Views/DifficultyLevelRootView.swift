@@ -17,7 +17,6 @@ final class DifficultyLevelRootView: BaseView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         NSLayoutConstraint.activate([
         
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -32,14 +31,11 @@ final class DifficultyLevelRootView: BaseView {
 extension DifficultyLevelRootView {
     
     override func setupViews() {
-        
         [easyLevelButton, mediumLevelButton, hardLevelButton].forEach{ stackView.addArrangedSubview($0) }
         [stackView].forEach{ addSubview($0) }
     }
-    
     override func configureAppearance() {
         super.configureAppearance()
-        
         [stackView].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
         stackView.axis = .vertical
@@ -51,7 +47,6 @@ extension DifficultyLevelRootView {
 private extension DifficultyLevelRootView {
     
     enum Constants {
-        
         static let mainSpacing: CGFloat = 30
         static let stakViewSpacing: CGFloat = 20
     }

@@ -26,12 +26,9 @@ final class ResultViewController: BaseViewController<ResultRootView> {
 private extension ResultViewController {
     
     func setupNavigationItem() {
-        
         self.navigationItem.title = R.Strings.ResultScreen.navigationTitle
     }
-    
     func setupButtonAction() {
-        
         mainView.restartButton.addTarget(self, action: #selector(restartButtonAction), for: .touchUpInside)
     }
 }
@@ -40,9 +37,7 @@ private extension ResultViewController {
 private extension ResultViewController {
     
     func restartButtonAction() {
-        
         let enterViewController = StartViewController()
-        
         self.transitionWithNavigationController(transitionTo: enterViewController)
     }
 }

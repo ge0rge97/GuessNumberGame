@@ -12,56 +12,44 @@ protocol PlayerRoundViewModelProtocol: AnyObject {
     var computerAnswer: Dynamic<String> { get }
     
     func playersTry(withNumber number: Int, completion: @escaping () -> Void)
-    
     func saveNumberOfTries()
+    func getMaximumNumber() -> Int
 }
  
 class PlayerRoundViewModel: PlayerRoundViewModelProtocol {
     
     var computerAnswer: Dynamic<String> = Dynamic("")
+    var playerRound: GameModel
     
-    private var playerRound: GameModel
-    
+    private let gameSystem = GameSystem()
     private var computerHiddenNumber: Int
-    
-    private let userDefaults = UserDefaults.standard
     
     init() {
         
-        let maximumNumber: Int = self.userDefaults.integer(forKey: R.UserDefaultsKeys.maximumNumber)
+        let maximumNumber: Int = try! gameSystem.load(R.UserDefaultsKeys.maximumNumber).state.difficultLevel.rawValue
         
         self.computerHiddenNumber = Int.random(in: 1...maximumNumber)
-        
         self.playerRound = GameModel(hiddenNumber: computerHiddenNumber)
     }
-    
     func playersTry(withNumber number: Int, completion: @escaping () -> Void) {
         
         if number == playerRound.hiddenNumber {
-            
             completion()
-            
             saveNumberOfTries()
-            
             computerAnswer.value = R.Strings.PlayerRound.correctAnswer
-            
         } else {
-            
             if number > computerHiddenNumber {
-                
                 computerAnswer.value = R.Strings.PlayerRound.tooMuchAnswer
             } else {
-                
                 computerAnswer.value = R.Strings.PlayerRound.tooLessAnswer
             }
-            
             playerRound.increaseNumberOfTries()
         }
     }
-    
     func saveNumberOfTries() {
-        
-        userDefaults.set(playerRound.numberOfTries,
-                         forKey: R.UserDefaultsKeys.playerRound)
+        try? gameSystem.save(playerRound, title: R.UserDefaultsKeys.playerRound)
+    }
+    func getMaximumNumber() -> Int {
+        return try! gameSystem.load(R.UserDefaultsKeys.maximumNumber).state.difficultLevel.rawValue
     }
 }

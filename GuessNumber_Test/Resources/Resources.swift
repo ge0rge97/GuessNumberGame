@@ -11,12 +11,9 @@ typealias R = Resources
 
 enum Resources {
     //MARK: - UserDefaults Keys
-    
     enum UserDefaultsKeys {
-        
         static let computerRound = "computerRound"
         static let playerRound = "playerRound"
-        
         static let maximumNumber = "difficultLevel"
     }
 }
@@ -26,19 +23,16 @@ extension Resources {
     enum Strings {
         
         enum Alert {
-            
             static let alertTitle = "Attention!"
             static let alertMessage = "Enter here your number."
         }
         
         enum  StartScreen {
-            
             static let startButton = "Let's start"
             static let navigationTitle = "Guess the Number Game"
         }
         
         enum DifficultyLevel {
-            
             static let navigationTitle = "Select Difficulty Level"
             static let easyButton = "Easy Level: 1-10"
             static let mediumButton = "Medium Level: 1-25"
@@ -46,19 +40,16 @@ extension Resources {
         }
         
         enum EnterNumberScreen {
-            
             static let enterNumberButton = "Enter your Number"
             static let navigationTitle = "Enter your Number"
         }
         
         enum ComputerRound {
-            
             static let navigationTitle = "Computer Turn"
             static let protectionAgainstLiar = "Sorry but you are LIAR!"
         }
         
         enum PlayerRound {
-            
             static let choiceButton = "Let's try"
             static let navigationTitle = "Player Turn"
             
@@ -68,7 +59,6 @@ extension Resources {
         }
         
         enum ResultScreen {
-            
             static let restartButton = "Restart?"
             static let navigationTitle = "Result"
         }

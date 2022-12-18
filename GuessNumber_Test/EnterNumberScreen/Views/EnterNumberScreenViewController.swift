@@ -9,10 +9,12 @@ import UIKit
 
 final class EnterNumberScreenViewController: BaseViewController<EnterNumberScreenRootView> {
     
-    private let userDefaults = UserDefaults.standard
+    private var enterNumberViewModel: EnterNumberViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.enterNumberViewModel = EnterNumberViewModel()
         
         enterNumberButtonAction()
         setupNavigationTitle()
@@ -22,15 +24,10 @@ final class EnterNumberScreenViewController: BaseViewController<EnterNumberScree
 private extension EnterNumberScreenViewController {
     
     func setupNavigationTitle() {
-        
         self.navigationItem.title = R.Strings.EnterNumberScreen.enterNumberButton
     }
-    
     func enterNumberButtonAction() {
-        
-        mainView.enterNumberButton.addTarget(self,
-                                             action: #selector(enterButtonAction),
-                                             for: .touchUpInside)
+        mainView.enterNumberButton.addTarget(self, action: #selector(enterButtonAction), for: .touchUpInside)
     }
 }
 //MARK: - Actions
@@ -38,19 +35,15 @@ private extension EnterNumberScreenViewController {
 extension EnterNumberScreenViewController {
     
     func enterButtonAction() {
-        
         self.getAlertWithCompletion(withTitle: R.Strings.Alert.alertTitle,
                                     andMessage: R.Strings.Alert.alertMessage) { [weak self]
             (number) in
             
-            guard number <= self?.userDefaults.integer(forKey: R.UserDefaultsKeys.maximumNumber) ?? 1 else {
-                
-                self?.createAlert(withTitle: "You number haven't been more than \(self?.userDefaults.integer(forKey: R.UserDefaultsKeys.maximumNumber) ?? 1)")
+            guard number <= self?.enterNumberViewModel?.getMaximumNumber() ?? 1 else {
+                self?.createAlert(withTitle: "You number haven't been more than \(self?.enterNumberViewModel?.getMaximumNumber() ?? 1)")
                 return
             }
-            
             let computerRoundViewController = ComputerRoundViewController(withHiddenNumber: number)
-            
             self?.transitionWithNavigationController(transitionTo: computerRoundViewController)
         }
     }

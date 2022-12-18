@@ -10,11 +10,9 @@ import UIKit
 final class StartRootView: BaseView {
     
     let startButton = BaseButton(withTitle: R.Strings.StartScreen.startButton)
-    
     //MARK: - Constraints
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         NSLayoutConstraint.activate([
             
             startButton.centerYAnchor.constraint(equalTo: centerYAnchor, constant: Constants.buttonHeight),
@@ -28,13 +26,10 @@ final class StartRootView: BaseView {
 extension StartRootView {
     
     override func setupViews() {
-        
         [startButton].forEach{ addSubview($0) }
     }
-    
     override func configureAppearance() {
         super.configureAppearance()
-        
         [startButton].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
     }
 }
@@ -42,7 +37,6 @@ extension StartRootView {
 private extension StartRootView {
     
     enum Constants {
-        
         static let buttonHeight: CGFloat = 70
     }
 }

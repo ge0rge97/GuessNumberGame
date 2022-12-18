@@ -15,7 +15,6 @@ final class DifficultyLevelViewController: BaseViewController<DifficultyLevelRoo
         super.viewDidLoad()
         
         self.difficultyLevelViewModel = DifficultyLevelViewModel()
-        
         setupNavigationItem()
         setupButtonAction()
     }
@@ -24,21 +23,16 @@ final class DifficultyLevelViewController: BaseViewController<DifficultyLevelRoo
 private extension DifficultyLevelViewController {
     
     func setupNavigationItem() {
-        
         self.navigationItem.title = R.Strings.DifficultyLevel.navigationTitle
     }
-    
     func setupButtonAction() {
-        
         self.mainView.easyLevelButton.addTarget(self, action: #selector(easyLevelButtonAction), for: .touchUpInside)
         self.mainView.mediumLevelButton.addTarget(self, action: #selector(mediumLevelButtonAction), for: .touchUpInside)
         self.mainView.hardLevelButton.addTarget(self, action: #selector(hardLevelButtonAction), for: .touchUpInside)
     }
-    
     func transitionToEnterNumberScreen() {
         
         let enterNumberViewController = EnterNumberScreenViewController()
-        
         self.transitionWithNavigationController(transitionTo: enterNumberViewController)
     }
 }
@@ -47,23 +41,15 @@ private extension DifficultyLevelViewController {
 private extension DifficultyLevelViewController {
     
     func easyLevelButtonAction() {
-        
         self.difficultyLevelViewModel?.easyLevelSelected()
-        
         self.transitionToEnterNumberScreen()
     }
-    
     func mediumLevelButtonAction() {
-        
         self.difficultyLevelViewModel?.mediumLevelSelected()
-        
         self.transitionToEnterNumberScreen()
     }
-    
     func hardLevelButtonAction() {
-        
         self.difficultyLevelViewModel?.hardLevelSelected()
-        
         self.transitionToEnterNumberScreen()
     }
 }

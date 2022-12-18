@@ -11,8 +11,6 @@ final class PlayerRoundViewController: BaseViewController<PlayerRoundRootView> {
     
     private var playerRoundViewModel: PlayerRoundViewModelProtocol?
     
-    private let userDefaults = UserDefaults.standard
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +18,6 @@ final class PlayerRoundViewController: BaseViewController<PlayerRoundRootView> {
         
         setupNavigationTitle()
         setupButtonAction()
-        
         bindViewModel()
     }
 }
@@ -28,19 +25,13 @@ final class PlayerRoundViewController: BaseViewController<PlayerRoundRootView> {
 private extension PlayerRoundViewController {
     
     func setupNavigationTitle() {
-        
         self.navigationItem.title = R.Strings.PlayerRound.navigationTitle
     }
-    
     func setupButtonAction() {
-        
         mainView.choiceButton.addTarget(self, action: #selector(choiceButtonAction), for: .touchUpInside)
     }
-    
     func bindViewModel() {
-        
         playerRoundViewModel?.computerAnswer.bind({ [weak self] (answer) in
-            
             DispatchQueue.main.async {
                 self?.mainView.answerLabel.text = answer
             }
@@ -50,23 +41,18 @@ private extension PlayerRoundViewController {
 //MARK: - Actions
 @objc
 private extension PlayerRoundViewController {
-    
     func choiceButtonAction() {
         
         self.getAlertWithCompletion(withTitle: R.Strings.Alert.alertTitle,
                                     andMessage: R.Strings.Alert.alertMessage) { [weak self]
             (number) in
             
-            guard number <= self?.userDefaults.integer(forKey: R.UserDefaultsKeys.maximumNumber) ?? 1 else {
-                
-                self?.createAlert(withTitle: "You number haven't been more than \(self?.userDefaults.integer(forKey: R.UserDefaultsKeys.maximumNumber) ?? 1)")
+            guard number <= self?.playerRoundViewModel?.getMaximumNumber() ?? 1 else {
+                self?.createAlert(withTitle: "You number haven't been more than \(self?.playerRoundViewModel?.getMaximumNumber() ?? 1)")
                 return
             }
-            
             self?.playerRoundViewModel?.playersTry(withNumber: number, completion: {
-                
                 let resultViewController = ResultViewController()
-                
                 self?.transitionWithNavigationController(transitionTo: resultViewController)
             })
         }

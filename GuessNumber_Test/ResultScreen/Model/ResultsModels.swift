@@ -10,25 +10,19 @@ import Foundation
 struct ResultsModels {
     
     var numberOfComputerTries: Int
-    
     var numberOfPlayersTries: Int
-    
     var results: Results
     
+    private let gameSystem = GameSystem()
+    
     init(results: Results) {
-        
-        let userDefaults = UserDefaults.standard
-        
-        self.numberOfComputerTries = userDefaults.integer(forKey: R.UserDefaultsKeys.computerRound)
-        
-        self.numberOfPlayersTries = userDefaults.integer(forKey: R.UserDefaultsKeys.playerRound)
-        
+        self.numberOfComputerTries = try! gameSystem.load(R.UserDefaultsKeys.computerRound).state.numberOfTries
+        self.numberOfPlayersTries = try! gameSystem.load(R.UserDefaultsKeys.playerRound).state.numberOfTries
         self.results = results
     }
 }
-
+//MARK: - Results
 extension ResultsModels {
-    
     enum Results: String {
         
         case computerWin
@@ -36,7 +30,6 @@ extension ResultsModels {
         case draw
         
         var title: String {
-            
             switch self {
             case .computerWin:
                 return "Computer win"

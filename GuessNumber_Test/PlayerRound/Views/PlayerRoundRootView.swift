@@ -10,14 +10,11 @@ import UIKit
 final class PlayerRoundRootView: BaseView {
     
     let choiceButton = BaseButton(withTitle: R.Strings.PlayerRound.choiceButton)
-    
     let answerLabel = UILabel()
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
         NSLayoutConstraint.activate([
-            
             answerLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Constants.buttonHeight),
             answerLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
         
@@ -32,13 +29,10 @@ final class PlayerRoundRootView: BaseView {
 extension PlayerRoundRootView {
     
     override func setupViews() {
-        
         [choiceButton, answerLabel].forEach{ addSubview($0) }
     }
-    
     override func configureAppearance() {
         super.configureAppearance()
-        
         [choiceButton, answerLabel].forEach{ $0.translatesAutoresizingMaskIntoConstraints = false }
         
         answerLabel.font = .systemFont(ofSize: 20)
@@ -49,7 +43,6 @@ extension PlayerRoundRootView {
 private extension PlayerRoundRootView {
     
     enum Constants {
-        
         static let buttonHeight: CGFloat = 70
     }
 }
