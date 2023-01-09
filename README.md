@@ -4,7 +4,7 @@ Easy iOS game in which the player and the computer compete in guessing numbers. 
 
 In app using:
 
-- ModelViewViewmodel (MVVM) architectural pattern
+- ModelViewViewModel (MVVM) architectural pattern
 - UIKit
 - OOP Patterns (Memento, Singletoon)
 - UserDefaults to save number of tries of each side
