@@ -20,44 +20,64 @@ class ComputerRoundViewModel: ComputerRoundViewModelProtocol {
     
     var computerVariant: Dynamic<Int>
     
-    private var playersHiddenNumber: Int
     private var computerRound: GameModel
     private var gameSystem = GameSystem()
-    private let maximumNumber: Int
+    private var maximumNumber: Int
+    private var minNumber = 1
     
     init(hiddenNumber: Int) {
         
         maximumNumber = try! gameSystem.load(R.UserDefaultsKeys.maximumNumber).state.difficultLevel.rawValue
-        
-        self.computerVariant = Dynamic((Int.random(in: 1...maximumNumber)))
-        self.playersHiddenNumber = hiddenNumber
-        self.computerRound = GameModel(hiddenNumber: hiddenNumber)
+        computerVariant = Dynamic((Int.random(in: 1...maximumNumber)))
+        computerRound = GameModel(hiddenNumber: hiddenNumber)
     }
     func increaseVariantNumber(completion: @escaping (String) -> Void) {
-        
-        guard computerVariant.value != playersHiddenNumber,
-              computerVariant.value > playersHiddenNumber else {
+        guard computerVariant.value != computerRound.hiddenNumber,
+              computerVariant.value > computerRound.hiddenNumber else {
             
             completion(protectionAgainstLiars())
             return
         }
-        self.computerRound.increaseNumberOfTries()
-        self.computerVariant.value = Int.random(in: 1...(self.computerVariant.value - 1))
+        computerVariant.value = newComputerTry(computerVariants: .increase,
+                                               currentValue: self.computerVariant.value)
     }
     func reduceVariantNumber(completion: @escaping (String) -> Void) {
-        
-        guard computerVariant.value != playersHiddenNumber,
-              computerVariant.value < playersHiddenNumber else {
+        guard computerVariant.value != computerRound.hiddenNumber,
+              computerVariant.value < computerRound.hiddenNumber else {
             
             completion(protectionAgainstLiars())
             return
         }
-        
-        self.computerRound.increaseNumberOfTries()
-        self.computerVariant.value = Int.random(in: (self.computerVariant.value + 1)...self.maximumNumber)
+        computerVariant.value = newComputerTry(computerVariants: .reduce,
+                                               currentValue: self.computerVariant.value)
     }
     func saveNumberOfTries() {
         try? gameSystem.save(computerRound, title: R.UserDefaultsKeys.computerRound)
+    }
+}
+//MARK: - Private Methods
+extension ComputerRoundViewModel {
+    
+    private enum ComputerVariants {
+        case increase
+        case reduce
+    }
+    
+    private func newComputerTry(computerVariants: ComputerVariants, currentValue: Int) -> Int {
+        
+        var numberOfOptions = Array(minNumber...maximumNumber)
+        
+        switch computerVariants {
+        case .increase:
+            maximumNumber = currentValue - 1
+            numberOfOptions = numberOfOptions.filter{ $0 < currentValue }
+        case .reduce:
+            minNumber = currentValue + 1
+            numberOfOptions = numberOfOptions.filter{ $0 > currentValue }
+        }
+        
+        self.computerRound.increaseNumberOfTries()
+        return numberOfOptions.randomElement() ?? 1
     }
     private func protectionAgainstLiars() -> String {
         return R.Strings.ComputerRound.protectionAgainstLiar

@@ -10,11 +10,13 @@ import UIKit
 final class ComputerRoundViewController: BaseViewController<ComputerRoundRootView> {
     
     private var computerRoundViewModel: ComputerRoundViewModelProtocol?
+    private var hiddenNumber: Int?
     
     init(withHiddenNumber number: Int) {
         super.init(nibName: nil, bundle: nil)
         
         self.computerRoundViewModel = ComputerRoundViewModel(hiddenNumber: number)
+        self.hiddenNumber = number
         
         setupNavigationItem()
         setupButtonActions()
@@ -61,6 +63,7 @@ extension ComputerRoundViewController {
         })
     }
     func correctButtonAction() {
+        guard hiddenNumber == computerRoundViewModel?.computerVariant.value else { return }
         self.computerRoundViewModel?.saveNumberOfTries()
         let playerRoundViewController = PlayerRoundViewController()
         self.transitionWithNavigationController(transitionTo: playerRoundViewController)
